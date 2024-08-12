@@ -35,21 +35,24 @@ exports.register = (req, res) => {
 
 // Login a user
 exports.login = (req, res) => {
-    const { username, password } = req.body; // Extract username and password from the request body
-    const users = readUsers(); // Read the current users from the users.json file
+    const { username, password } = req.body;
+    const users = readUsers();
 
-    if (!users[username] || users[username].password !== password) { // Check if the username exists and the password matches
-        return res.status(400).send('Invalid username or password.'); // If not, send an error response
+    if (!users[username] || users[username].password !== password) {
+        return res.status(400).send('Invalid username or password.');
     }
 
-    // Set a cookie for the session
+    // Log login activity
+    logActivity(username, 'login');
+
     res.cookie('username', username, {
-        maxAge: req.body.rememberMe ? 10 * 24 * 60 * 60 * 1000 : 30 * 60 * 1000 // 10 days or 30 minutes depending on 'remember me' 
-        // If req.body.rememberMe is truthy (i.e., the checkbox was checked), we set the cookie’s maxAge to 10 days (10 * 24 * 60 * 60 * 1000 milliseconds). Otherwise, we set it to 30 minutes (30 * 60 * 1000 milliseconds).
+        maxAge: req.body.rememberMe ? 10 * 24 * 60 * 60 * 1000 : 30 * 60 * 1000
     });
 
-    res.status(200).send('Login successful.'); // Send a success response
+    // Redirect to the store page after successful login
+    res.redirect('/users/store');
 };
+
 
 // Middleware to check if the user is authenticated
 exports.isAuthenticated = (req, res, next) => {
@@ -63,6 +66,24 @@ exports.isAuthenticated = (req, res, next) => {
 
 // Logout a user
 exports.logout = (req, res) => {
-    res.clearCookie('username'); // Clear the session cookie
-    res.status(200).send('Logged out successfully.'); // Send a success response
+    // Log logout activity
+    logActivity(req.cookies.username, 'logout');
+
+    res.clearCookie('username');
+    res.redirect('/users/login');
 };
+
+
+const activityLogPath = path.join(__dirname, '../data/activityLog.json');
+
+// Helper function to log activities
+function logActivity(username, activityType) {
+    const activityLog = JSON.parse(fs.readFileSync(activityLogPath));
+    const newLog = {
+        datetime: new Date().toISOString(),
+        username,
+        type: activityType
+    };
+    activityLog.push(newLog);
+    fs.writeFileSync(activityLogPath, JSON.stringify(activityLog, null, 2));
+}

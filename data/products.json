@@ -1,0 +1,62 @@
+[
+    {
+        "title": "Black Nike Dunk",
+        "description": "A comfortable running shoe.",
+        "price": 59.99,
+        "image": "/images/black.jpg"
+    },
+    {
+        "title": "Black with Patches Dunks",
+        "description": "A stylish casual shoe.",
+        "price": 89.99,
+        "image": "/images/black-colors.jpg"
+    },
+    {
+        "title": "Blue and white Dunks",
+        "description": "A stylish casual shoe.",
+        "price": 89.99,
+        "image": "/images/blue-white.jpg"
+    },
+    {
+        "title": "Blue and white Dunks",
+        "description": "A stylish casual shoe.",
+        "price": 89.99,
+        "image": "/images/colorful.jpg"
+    },
+    {
+        "title": "Blue and white Dunks",
+        "description": "A stylish casual shoe.",
+        "price": 89.99,
+        "image": "/images/green-black.jpg"
+    },
+    {
+        "title": "Blue and white Dunks",
+        "description": "A stylish casual shoe.",
+        "price": 89.99,
+        "image": "/images/green-white-red.jpg"
+    },
+    {
+        "title": "Blue and white Dunks",
+        "description": "A stylish casual shoe.",
+        "price": 89.99,
+        "image": "/images/green-white.jpg"
+    },
+    {
+        "title": "Blue and white Dunks",
+        "description": "A stylish casual shoe.",
+        "price": 89.99,
+        "image": "/images/purple-white-bottom.jpg"
+    },
+    {
+        "title": "Blue and white Dunks",
+        "description": "A stylish casual shoe.",
+        "price": 89.99,
+        "image": "/images/purple-white.jpg"
+    },
+    {
+        "title": "Blue and white Dunks",
+        "description": "A stylish casual shoe.",
+        "price": 89.99,
+        "image": "/images/white.jpg"
+    }
+]

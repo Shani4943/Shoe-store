@@ -1,0 +1,28 @@
+{
+  "shani": [
+    {
+      "title": "Black Nike Dunk",
+      "description": "A comfortable running shoe.",
+      "price": 59.99,
+      "image": "/images/black.jpg"
+    },
+    {
+      "title": "Blue and white Dunks",
+      "description": "A stylish casual shoe.",
+      "price": 89.99,
+      "image": "/images/blue-white.jpg"
+    },
+    {
+      "title": "Blue and white Dunks",
+      "description": "A stylish casual shoe.",
+      "price": 89.99,
+      "image": "/images/blue-white.jpg"
+    },
+    {
+      "title": "Blue and white Dunks",
+      "description": "A stylish casual shoe.",
+      "price": 89.99,
+      "image": "/images/blue-white.jpg"
+    }
+  ]
+}

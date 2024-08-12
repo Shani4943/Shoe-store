@@ -1,13 +1,45 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart</title>
+    <title>Your Cart</title>
 </head>
 <body>
     <h1>Your Shopping Cart</h1>
-    <p>Here are the items in your cart.</p>
+
+    <!-- Cart Items -->
+    <ul>
+        <% if (cart.length > 0) { %>
+            <% cart.forEach(function(item) { %>
+                <li>
+                    <strong><%= item.title %></strong> - $<%= item.price %>
+                    <% if (item.image) { %>
+                        <img src="<%= item.image %>" alt="<%= item.title %>" style="max-width: 100px;">
+                    <% } %>
+                    <form action="/store/remove-from-cart" method="POST" style="display:inline;">
+                        <input type="hidden" name="title" value="<%= item.title %>">
+                        <button type="submit">Remove</button>
+                    </form>
+                </li>
+            <% }); %>
+        <% } else { %>
+            <p>Your cart is empty.</p>
+        <% } %>
+    </ul>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="/store">Store</a></li>
+            <li><a href="/cart">Cart</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Checkout Button -->
+    <form action="/checkout" method="POST">
+        <button type="submit">Checkout</button>
+    </form>
 </body>
 </html>

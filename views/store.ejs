@@ -1,14 +1,62 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Store</title>
+    <!-- use AJAX -->
+    <script>
+        function addToCart(title) {
+            console.log('addToCart function called with title:', title);
+            fetch('/store/add-to-cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ title: title })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Item added to cart!');
+                } else {
+                    alert('Error adding item to cart.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error adding item to cart.');
+            });
+        }
+    </script>
 </head>
 <body>
     <h1>Welcome to the Store</h1>
     <p>Here you can browse and purchase items.</p>
+
+    <!-- navigation -->
+    <nav>
+        <ul>
+            <li><a href="/store">Store</a></li>
+            <li><a href="/cart">Cart</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Display Products -->
+    <div id="products">
+        <% products.forEach(function(product) { %>
+            <div class="product">
+                <h2><%= product.title %></h2>
+                <p><%= product.description %></p>
+                <% if (product.image) { %>
+                    <img src="<%= product.image %>" alt="<%= product.title %>" style="max-width: 200px;">
+                <% } %>
+                <p>Price: $<%= product.price %></p>
+                <button onclick="addToCart('<%= product.title %>')">Add to Cart</button>
+            </div>
+        <% }); %>
+    </div>
 </body>
 </html>
+i
