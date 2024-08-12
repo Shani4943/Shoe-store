@@ -1,3 +1,8 @@
+
+//In a Node.js application, the controllers directory is typically used to store 
+//the logic that handles requests and generates responses. 
+
+
 const fs = require('fs');
 const path = require('path');
 const usersFilePath = path.join(__dirname, '../data/users.json');
@@ -39,11 +44,22 @@ exports.login = (req, res) => {
 
     // Set a cookie for the session
     res.cookie('username', username, {
-        maxAge: req.body.rememberMe ? 10 * 24 * 60 * 60 * 1000 : 30 * 60 * 1000 // 10 days or 30 minutes depending on 'remember me'
+        maxAge: req.body.rememberMe ? 10 * 24 * 60 * 60 * 1000 : 30 * 60 * 1000 // 10 days or 30 minutes depending on 'remember me' 
+        // If req.body.rememberMe is truthy (i.e., the checkbox was checked), we set the cookie’s maxAge to 10 days (10 * 24 * 60 * 60 * 1000 milliseconds). Otherwise, we set it to 30 minutes (30 * 60 * 1000 milliseconds).
     });
 
     res.status(200).send('Login successful.'); // Send a success response
 };
+
+// Middleware to check if the user is authenticated
+exports.isAuthenticated = (req, res, next) => {
+    if (req.cookies.username) {  // Check if the 'username' cookie is present
+        return next();  // If the user is authenticated, proceed to the next middleware/route handler
+    } else {
+        res.redirect('/users/login');  // If not authenticated, redirect to the login page
+    }
+};
+
 
 // Logout a user
 exports.logout = (req, res) => {
