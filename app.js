@@ -14,6 +14,10 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+const userRoutes = require('./routes/userRoutes');
+app.use('/users', userRoutes);
+
+
 // Set up views directory
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');  // You can use any templating engine, here we're using EJS
