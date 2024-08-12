@@ -17,10 +17,10 @@
                     <% if (item.image) { %>
                         <img src="<%= item.image %>" alt="<%= item.title %>" style="max-width: 100px;">
                     <% } %>
-                    <form action="/store/remove-from-cart" method="POST" style="display:inline;">
+                    <form action="/users/store/remove-from-cart" method="POST" style="display:inline;">
                         <input type="hidden" name="title" value="<%= item.title %>">
                         <button type="submit">Remove</button>
-                    </form>
+                    </form>                    
                 </li>
             <% }); %>
         <% } else { %>
