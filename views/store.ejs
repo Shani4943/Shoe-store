@@ -8,7 +8,7 @@
     <script>
         function addToCart(title) {
             console.log('addToCart function called with title:', title);
-            fetch('/store/add-to-cart', {
+            fetch('/users/store/add-to-cart', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -37,9 +37,9 @@
     <!-- navigation -->
     <nav>
         <ul>
-            <li><a href="/store">Store</a></li>
-            <li><a href="/cart">Cart</a></li>
-            <li><a href="/logout">Logout</a></li>
+            <li><a href="/users/store">Store</a></li>
+            <li><a href="/users/cart">Cart</a></li>
+            <li><a href="/users/logout">Logout</a></li>
         </ul>
     </nav>
 

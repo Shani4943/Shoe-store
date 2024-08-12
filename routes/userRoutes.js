@@ -95,6 +95,39 @@ router.post('/store/add-to-cart', isAuthenticated, (req, res) => {
     res.json({ success: true });
 });
 
+router.post('/store/add-to-cart', isAuthenticated, (req, res) => {
+    console.log('Add to Cart route hit');
+    console.log('Request body:', req.body); // This will log the incoming data
+    
+    const { title } = req.body;
+    const username = req.cookies.username;
+
+    try {
+        const products = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/products.json')));
+        const product = products.find(p => p.title === title);
+
+        if (!product) {
+            console.log('Product not found:', title);
+            return res.status(400).json({ success: false, message: 'Product not found.' });
+        }
+
+        const cart = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/cart.json')));
+
+        if (!cart[username]) {
+            cart[username] = [];
+        }
+
+        cart[username].push(product);
+
+        fs.writeFileSync(path.join(__dirname, '../data/cart.json'), JSON.stringify(cart, null, 2));
+
+        console.log('Product added to cart:', product);
+        res.json({ success: true });
+    } catch (error) {
+        console.error('Error processing the request:', error);
+        res.status(500).json({ success: false, message: 'Internal server error' });
+    }
+});
 
 
 

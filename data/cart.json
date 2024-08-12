@@ -23,6 +23,12 @@
       "description": "A stylish casual shoe.",
       "price": 89.99,
       "image": "/images/blue-white.jpg"
+    },
+    {
+      "title": "Blue and white Dunks",
+      "description": "A stylish casual shoe.",
+      "price": 89.99,
+      "image": "/images/blue-white.jpg"
     }
   ]
 }
