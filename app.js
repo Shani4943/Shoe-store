@@ -1,6 +1,6 @@
 
 
-
+//import the necessary modules
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
@@ -14,9 +14,6 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-const userRoutes = require('./routes/userRoutes');
-app.use('/users', userRoutes);
-
 
 // Set up views directory
 app.set('views', path.join(__dirname, 'views'));
@@ -27,6 +24,9 @@ app.set('view engine', 'ejs');  // You can use any templating engine, here we're
 app.get('/', (req, res) => {
     res.send('Welcome to the Shoe Store!');
 });
+
+const userRoutes = require('./routes/userRoutes');
+app.use('/users', userRoutes);
 
 // Start server
 const PORT = process.env.PORT || 3000;
