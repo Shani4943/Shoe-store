@@ -22,7 +22,7 @@ app.use('/users', userRoutes);
 
 // Example route (you'll create more later)
 app.get('/', (req, res) => {
-    res.send('Welcome to the Shoe Store!');
+    res.redirect('/users/login');
 });
 
 
