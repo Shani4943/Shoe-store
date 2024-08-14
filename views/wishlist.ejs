@@ -55,7 +55,13 @@
         <% if (wishlist.length > 0) { %>
             <% wishlist.forEach(function(item) { %>
                 <li id="<%= item.title %>">
-                    <strong><%= item.title %></strong>
+                    <strong><%= item.title %></strong> - $<%= item.price %>
+                    <% if (item.image) { %>
+                        <img src="<%= item.image %>" alt="<%= item.title %>" style="max-width: 100px;">
+                    <% } %>
+                    <% if (item.price) { %>
+                        <p>Price: $<%= item.price.toFixed(2) %></p>
+                    <% } %>
                     <button onclick="removeFromWishlist('<%= item.title %>')">Remove</button>
                 </li>
             <% }); %>
@@ -63,6 +69,5 @@
             <p>Your wishlist is empty.</p>
         <% } %>
     </ul>
-
 </body>
 </html>

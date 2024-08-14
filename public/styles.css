@@ -48,7 +48,7 @@ nav ul li a {
     font-size: 1.2em;
 }
 
-/* Cart Items Styling */
+/* List Items Styling */
 ul {
     list-style-type: none;
     padding: 0;
@@ -69,6 +69,7 @@ li {
 
 li img {
     display: block;
+    max-width: 100px; /* Ensure images are not too large */
     margin-top: 10px;
 }
 
@@ -76,7 +77,7 @@ form {
     margin-top: 10px;
 }
 
-/* Checkout Button Styling */
+/* Button Styling */
 button[type="submit"] {
     background-color: #333; /* Dark grey button */
     color: #fff; /* White text */

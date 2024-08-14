@@ -30,7 +30,6 @@
             });
         }
 
-
         function addToWishlist(title) {
             console.log('addToWishlist function called with title:', title);
             fetch('/users/wishlist/add', {
@@ -51,7 +50,9 @@
             .catch(error => {
                 console.error('Error:', error);
                 alert('Error adding item to wishlist.');
-                
+            });
+        }
+
         function filterProducts() {
             const query = document.getElementById('search').value.toLowerCase();
             const products = document.querySelectorAll('.product');
@@ -77,7 +78,7 @@
         <input type="text" id="search" placeholder="Search for products..." onkeyup="filterProducts()">
     </div>
 
-    <!-- navigation -->
+    <!-- Navigation -->
     <nav>
         <ul>
             <li><a href="/users/store">Store</a></li>
@@ -91,6 +92,7 @@
     </nav>
 
     <p>Here you can browse and purchase items.</p>
+
     <!-- Display Products -->
     <div id="products">
         <% products.forEach(function(product) { %>
