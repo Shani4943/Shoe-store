@@ -73,6 +73,48 @@ router.post('/admin/clear-logs', isAuthenticated, isAdmin, (req, res) => {
     res.status(200).json({ success: true });
 });
 
+router.post('/admin/delete-product', isAuthenticated, isAdmin, (req, res) => {
+    const { title } = req.body;
+
+    // Load the products from the JSON file
+    const products = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/products.json')));
+
+    // Filter out the product that matches the title
+    const updatedProducts = products.filter(product => product.title !== title);
+
+    // Save the updated products back to the file
+    fs.writeFileSync(path.join(__dirname, '../data/products.json'), JSON.stringify(updatedProducts, null, 2));
+
+    // Redirect back to the admin page
+    res.redirect('/users/admin');
+});
+
+router.post('/admin/add-product', isAuthenticated, isAdmin, (req, res) => {
+    const { title, description, image, price } = req.body;
+
+    // Load the existing products from the JSON file
+    const products = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/products.json')));
+
+    // Create a new product object
+    const newProduct = {
+        title,
+        description,
+        image: `/images/${image}`, // Store the path to the image in the public directory
+        price: parseFloat(price) // Convert the price to a number
+    };
+
+    // Add the new product to the array of products
+    products.push(newProduct);
+
+    // Save the updated products back to the file
+    fs.writeFileSync(path.join(__dirname, '../data/products.json'), JSON.stringify(products, null, 2));
+
+    // Redirect back to the admin page
+    res.redirect('/users/admin');
+});
+
+
+
 
 
 // add to cart route

@@ -83,12 +83,15 @@
     <h2>Manage Products</h2>
 
     <!-- Form to Add Products -->
-    <form action="/users/admin/add-product" method="POST">
-        <input type="text" name="title" placeholder="Product Title" required>
-        <input type="text" name="description" placeholder="Product Description" required>
-        <input type="text" name="image" placeholder="Image URL">
-        <button type="submit">Add Product</button>
-    </form>
+<form action="/users/admin/add-product" method="POST">
+    <input type="text" name="title" placeholder="Product Title" required>
+    <input type="text" name="description" placeholder="Product Description" required>
+    <input type="text" name="image" placeholder="Image Filename (e.g., blackshoe.jpg)" required>
+    <input type="number" name="price" placeholder="Product Price (in $)" required>
+    <button type="submit">Add Product</button>
+</form>
+
+
 
     <h3>Existing Products</h3>
     <ul>

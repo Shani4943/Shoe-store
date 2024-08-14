@@ -5,6 +5,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const moment = require('moment-timezone'); // Ensure moment-timezone is imported
 const usersFilePath = path.join(__dirname, '../data/users.json');
 
 // Helper function to read user data
@@ -34,24 +35,47 @@ exports.register = (req, res) => {
 };
 
 // Login a user
+
 exports.login = (req, res) => {
     const { username, password } = req.body;
-    const users = readUsers();
+    const users = readUsers(); // Assuming this function reads the users from a file
 
     if (!users[username] || users[username].password !== password) {
         return res.status(400).send('Invalid username or password.');
     }
 
-    // Log login activity
-    logActivity(username, 'login');
+    // Log login activity with Tel Aviv time
+    const activityLog = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/activityLog.json')));
+    activityLog.push({
+        datetime: moment().tz('Asia/Jerusalem').format('YYYY-MM-DD HH:mm:ss'),
+        username: username,
+        type: 'Login'
+    });
+    fs.writeFileSync(path.join(__dirname, '../data/activityLog.json'), JSON.stringify(activityLog, null, 2));
 
     res.cookie('username', username, {
-        maxAge: req.body.rememberMe ? 10 * 24 * 60 * 60 * 1000 : 30 * 60 * 1000
+        maxAge: req.body.rememberMe ? 10 * 24 * 60 * 60 * 1000 : 30 * 60 * 1000 // Handle rememberMe logic
     });
 
-    // Redirect to the store page after successful login
-    res.redirect('/users/store');
+    res.redirect('/users/store'); // Redirect to store after login
 };
+
+exports.logout = (req, res) => {
+    const username = req.cookies.username;
+
+    // Log logout activity with Tel Aviv time
+    const activityLog = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/activityLog.json')));
+    activityLog.push({
+        datetime: moment().tz('Asia/Jerusalem').format('YYYY-MM-DD HH:mm:ss'),
+        username: username,
+        type: 'Logout'
+    });
+    fs.writeFileSync(path.join(__dirname, '../data/activityLog.json'), JSON.stringify(activityLog, null, 2));
+
+    res.clearCookie('username');
+    res.redirect('/users/login');
+};
+
 
 
 // Middleware to check if the user is authenticated
@@ -62,17 +86,6 @@ exports.isAuthenticated = (req, res, next) => {
         res.redirect('/users/login');  // If not authenticated, redirect to the login page
     }
 };
-
-
-// Logout a user
-exports.logout = (req, res) => {
-    // Log logout activity
-    logActivity(req.cookies.username, 'logout');
-
-    res.clearCookie('username');
-    res.redirect('/users/login');
-};
-
 
 const activityLogPath = path.join(__dirname, '../data/activityLog.json');
 

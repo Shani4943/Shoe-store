@@ -1,62 +1,62 @@
 [
-    {
-        "title": "Black Nike Dunk with smiley",
-        "description": "A comfortable running shoe.",
-        "price": 59.99,
-        "image": "/images/black.jpg"
-    },
-    {
-        "title": "Black with Patches Dunks",
-        "description": "A stylish casual shoe.",
-        "price": 89.99,
-        "image": "/images/black-colors.jpg"
-    },
-    {
-        "title": "Blue and white Dunks",
-        "description": "A stylish casual shoe.",
-        "price": 89.99,
-        "image": "/images/blue-white.jpg"
-    },
-    {
-        "title": "tie die black Dunks",
-        "description": "A stylish casual shoe.",
-        "price": 89.99,
-        "image": "/images/colorful.jpg"
-    },
-    {
-        "title": "Green and Black",
-        "description": "A stylish casual shoe.",
-        "price": 89.99,
-        "image": "/images/green-black.jpg"
-    },
-    {
-        "title": "Olive green",
-        "description": "A stylish casual shoe.",
-        "price": 89.99,
-        "image": "/images/green-white-red.jpg"
-    },
-    {
-        "title": "White&Green",
-        "description": "A stylish casual shoe.",
-        "price": 89.99,
-        "image": "/images/green-white.jpg"
-    },
-    {
-        "title": "purple-white with platform",
-        "description": "A stylish casual shoe.",
-        "price": 89.99,
-        "image": "/images/purple-white-bottom.jpg"
-    },
-    {
-        "title": "purple-white",
-        "description": "A stylish casual shoe.",
-        "price": 89.99,
-        "image": "/images/purple-white.jpg"
-    },
-    {
-        "title": "white Dunks",
-        "description": "A stylish casual shoe.",
-        "price": 89.99,
-        "image": "/images/white.jpg"
-    }
+  {
+    "title": "Black with Patches Dunks",
+    "description": "A stylish casual shoe.",
+    "price": 89.99,
+    "image": "/images/black-colors.jpg"
+  },
+  {
+    "title": "Blue and white Dunks",
+    "description": "A stylish casual shoe.",
+    "price": 89.99,
+    "image": "/images/blue-white.jpg"
+  },
+  {
+    "title": "tie die black Dunks",
+    "description": "A stylish casual shoe.",
+    "price": 89.99,
+    "image": "/images/colorful.jpg"
+  },
+  {
+    "title": "Green and Black",
+    "description": "A stylish casual shoe.",
+    "price": 89.99,
+    "image": "/images/green-black.jpg"
+  },
+  {
+    "title": "Olive green",
+    "description": "A stylish casual shoe.",
+    "price": 89.99,
+    "image": "/images/green-white-red.jpg"
+  },
+  {
+    "title": "White&Green",
+    "description": "A stylish casual shoe.",
+    "price": 89.99,
+    "image": "/images/green-white.jpg"
+  },
+  {
+    "title": "purple-white with platform",
+    "description": "A stylish casual shoe.",
+    "price": 89.99,
+    "image": "/images/purple-white-bottom.jpg"
+  },
+  {
+    "title": "purple-white",
+    "description": "A stylish casual shoe.",
+    "price": 89.99,
+    "image": "/images/purple-white.jpg"
+  },
+  {
+    "title": "white Dunks",
+    "description": "A stylish casual shoe.",
+    "price": 89.99,
+    "image": "/images/white.jpg"
+  },
+  {
+    "title": "Black with patches",
+    "description": "stylish",
+    "image": "/images/black.jpg",
+    "price": 72
+  }
 ]
