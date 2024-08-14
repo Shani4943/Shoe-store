@@ -1,3 +1,16 @@
 {
-  "shani": []
+  "shani": [
+    {
+      "title": "Black with Patches Dunks",
+      "description": "A stylish casual shoe.",
+      "price": 89.99,
+      "image": "/images/black-colors.jpg"
+    },
+    {
+      "title": "Blue and white Dunks",
+      "description": "A stylish casual shoe.",
+      "price": 89.99,
+      "image": "/images/blue-white.jpg"
+    }
+  ]
 }
