@@ -66,6 +66,13 @@ router.get('/admin', isAuthenticated, isAdmin, (req, res) => {
     res.render('admin', { activityLog, products });  // Pass both `activityLog` and `products` to the template
 });
 
+router.post('/admin/clear-logs', isAuthenticated, isAdmin, (req, res) => {
+    // Clear the activity log
+    fs.writeFileSync(path.join(__dirname, '../data/activityLog.json'), JSON.stringify([])); // Empty array
+
+    res.status(200).json({ success: true });
+});
+
 
 
 // add to cart route

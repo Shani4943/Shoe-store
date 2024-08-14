@@ -40,26 +40,44 @@
 
     <!-- Activity Log Section -->
     <h2>User Activity Log</h2>
-    <input type="text" id="usernameFilter" onkeyup="filterActivities()" placeholder="Filter by username...">
+<input type="text" id="usernameFilter" onkeyup="filterActivities()" placeholder="Filter by username...">
+<button onclick="clearLogs()">Clear Logs</button> <!-- Clear Logs Button -->
 
-    <table>
-        <thead>
-            <tr>
-                <th>Date/Time</th>
-                <th>Username</th>
-                <th>Activity</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% activityLog.forEach(function(activity) { %>
-            <tr class="activityRow">
-                <td><%= activity.datetime %></td>
-                <td><%= activity.username %></td>
-                <td><%= activity.type %></td>
-            </tr>
-            <% }); %>
-        </tbody>
-    </table>
+<table>
+    <thead>
+        <tr>
+            <th>Date/Time</th>
+            <th>Username</th>
+            <th>Activity</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% activityLog.forEach(function(activity) { %>
+        <tr class="activityRow">
+            <td><%= activity.datetime %></td>
+            <td><%= activity.username %></td>
+            <td><%= activity.type %></td>
+        </tr>
+        <% }); %>
+    </tbody>
+</table>
+
+<script>
+    function clearLogs() {
+        fetch('/users/admin/clear-logs', {
+            method: 'POST'
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Logs cleared!');
+                location.reload(); // Refresh the page to show the cleared logs
+            } else {
+                alert('Failed to clear logs.');
+            }
+        });
+    }
+</script>
+
 
     <!-- Product Management Section -->
     <h2>Manage Products</h2>
