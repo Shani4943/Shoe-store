@@ -4,47 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Store</title>
-    <style>
-        /* Make the navigation bar sticky */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background-color: #333;
-            color: white;
-            padding: 10px 0;
-            z-index: 1000; /* Ensure it stays above other elements */
-        }
-
-        nav ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            text-align: center;
-        }
-
-        nav ul li {
-            display: inline;
-            margin-right: 20px;
-        }
-
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-size: 18px;
-        }
-
-        /* Add some padding to the top of the page content to prevent overlap */
-        body {
-            padding-top: 60px; /* Adjust this value if the nav bar height changes */
-        }
-
-        /* Additional styling */
-        .product {
-            margin-top: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="/styles.css">
+    <!-- use AJAX -->
     <script>
         function addToCart(title) {
             console.log('addToCart function called with title:', title);
@@ -69,6 +30,28 @@
             });
         }
 
+
+        function addToWishlist(title) {
+            console.log('addToWishlist function called with title:', title);
+            fetch('/users/wishlist/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ title: title })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Item added to wishlist!');
+                } else {
+                    alert(data.message || 'Error adding item to wishlist.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error adding item to wishlist.');
+                
         function filterProducts() {
             const query = document.getElementById('search').value.toLowerCase();
             const products = document.querySelectorAll('.product');
@@ -88,7 +71,6 @@
 </head>
 <body>
     <h1>Welcome to the Store</h1>
-    <p>Here you can browse and purchase items.</p>
 
     <!-- Search Bar -->
     <div>
@@ -100,10 +82,15 @@
         <ul>
             <li><a href="/users/store">Store</a></li>
             <li><a href="/users/cart">Cart</a></li>
+            <li><a href="/users/wishlist">Wishlist</a></li>
+            <li><a href="/users/giftcard">Buy Gift Card</a></li>  
+            <li><a href="/users/contact">Contact Us</a></li>
+            <li><a href="/users/terms">Regulations and Terms</a></li>
             <li><a href="/users/logout">Logout</a></li>
         </ul>
     </nav>
 
+    <p>Here you can browse and purchase items.</p>
     <!-- Display Products -->
     <div id="products">
         <% products.forEach(function(product) { %>
@@ -115,6 +102,7 @@
                 <% } %>
                 <p>Price: $<%= product.price %></p>
                 <button onclick="addToCart('<%= product.title %>')">Add to Cart</button>
+                <button onclick="addToWishlist('<%= product.title %>')">Add to Wishlist</button>
             </div>
         <% }); %>
     </div>

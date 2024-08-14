@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1>Contact us</h1>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="/users/store">Store</a></li>
+            <li><a href="/users/cart">Cart</a></li>
+            <li><a href="/users/wishlist">Wishlist</a></li>
+            <li><a href="/users/giftcard">Buy Gift Card</a></li>  
+            <li><a href="/users/contact">Contact Us</a></li>
+            <li><a href="/users/terms">Regulations and Terms</a></li>
+            <li><a href="/users/logout">Logout</a></li>
+        </ul>
+    </nav>
+
+    <form action="/users/contact" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        
+        <label for="orderNumber">Order Number:</label>
+        <input type="text" id="orderNumber" name="orderNumber" required>
+        
+        <label for="reason">Reason for Contact:</label>
+        <select id="reason" name="reason" required>
+            <option value="order_tracking">Order Tracking</option>
+            <option value="store_credit">Store Credit</option>
+            <option value="exchange_returns">Exchange and Returns</option>
+            <option value="other">Other</option>
+        </select>
+        
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+        
+        <button type="submit">Send</button>
+    </form>
+</body>
+</html>

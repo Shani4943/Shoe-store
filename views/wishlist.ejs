@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Wishlist</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script>
+        function removeFromWishlist(title) {
+            fetch('/users/wishlist/remove', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ title: title })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Item removed from wishlist!');
+                    // Remove the item from the DOM
+                    const itemElement = document.getElementById(title);
+                    if (itemElement) {
+                        itemElement.remove();
+                    }
+                } else {
+                    alert('Error removing item from wishlist.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error removing item from wishlist.');
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Your Wishlist</h1>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="/users/store">Store</a></li>
+            <li><a href="/users/cart">Cart</a></li>
+            <li><a href="/users/wishlist">Wishlist</a></li>
+            <li><a href="/users/giftcard">Buy Gift Card</a></li>  
+            <li><a href="/users/contact">Contact Us</a></li>
+            <li><a href="/users/terms">Regulations and Terms</a></li>
+            <li><a href="/users/logout">Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Wishlist Items -->
+    <ul>
+        <% if (wishlist.length > 0) { %>
+            <% wishlist.forEach(function(item) { %>
+                <li id="<%= item.title %>">
+                    <strong><%= item.title %></strong>
+                    <button onclick="removeFromWishlist('<%= item.title %>')">Remove</button>
+                </li>
+            <% }); %>
+        <% } else { %>
+            <p>Your wishlist is empty.</p>
+        <% } %>
+    </ul>
+
+</body>
+</html>

@@ -1,6 +1,4 @@
-
-
-//import the necessary modules
+// Import the necessary modules
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const path = require('path');
@@ -9,7 +7,7 @@ const app = express();
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser()); //parse cookies
+app.use(cookieParser()); // Parse cookies
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
@@ -24,7 +22,6 @@ app.use('/users', userRoutes);
 app.get('/', (req, res) => {
     res.redirect('/users/login');
 });
-
 
 // Start server
 const PORT = process.env.PORT || 3000;
