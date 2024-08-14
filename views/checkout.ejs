@@ -46,11 +46,12 @@
         <ul>
             <% cart.forEach(function(item) { %>
                 <li>
-                    <strong><%= item.title %></strong> - $<%= item.price %>
+                    <strong><%= item.title %></strong> - $<%= item.price %> x <%= item.quantity %> = $<%= item.price * item.quantity %>
                 </li>
             <% }); %>
         </ul>
         <p>Total: $<%= totalPrice %></p>
+        
     </div>
 
     <form action="/users/checkout/complete" method="POST">

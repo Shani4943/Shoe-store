@@ -1,5 +1,20 @@
 {
-  "shani": [],
+  "shani": [
+    {
+      "title": "Black Nike Dunk with smiley",
+      "description": "A comfortable running shoe.",
+      "price": 59.99,
+      "image": "/images/black.jpg",
+      "quantity": 3
+    },
+    {
+      "title": "Black with Patches Dunks",
+      "description": "A stylish casual shoe.",
+      "price": 89.99,
+      "image": "/images/black-colors.jpg",
+      "quantity": 1
+    }
+  ],
   "admin": [
     {
       "title": "Black Nike Dunk with smiley",

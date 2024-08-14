@@ -22,20 +22,29 @@
         </ul>
     </nav>
 
-
     <!-- Cart Items -->
     <ul>
         <% if (cart.length > 0) { %>
             <% cart.forEach(function(item) { %>
                 <li>
-                    <strong><%= item.title %></strong> - $<%= item.price %>
+                    <strong><%= item.title %></strong> - $<%= item.price %> 
+                    (Quantity: <%= item.quantity %>)
                     <% if (item.image) { %>
                         <img src="<%= item.image %>" alt="<%= item.title %>" style="max-width: 100px;">
                     <% } %>
                     <form action="/users/store/remove-from-cart" method="POST" style="display:inline;">
                         <input type="hidden" name="title" value="<%= item.title %>">
                         <button type="submit">Remove</button>
-                    </form>                    
+                    </form>
+                    <form action="/users/store/increase-quantity" method="POST" style="display:inline;">
+                        <input type="hidden" name="title" value="<%= item.title %>">
+                        <button type="submit">+</button>
+                    </form>
+                    <span><%= item.quantity %></span> <!-- Quantity display between buttons -->
+                    <form action="/users/store/decrease-quantity" method="POST" style="display:inline;">
+                        <input type="hidden" name="title" value="<%= item.title %>">
+                        <button type="submit">-</button>
+                    </form>
                 </li>
             <% }); %>
         <% } else { %>
@@ -43,11 +52,10 @@
         <% } %>
     </ul>
 
-
-   <!-- Checkout Button -->
-<form action="/users/checkout" method="GET">
-    <button type="submit">Checkout</button>
-</form>
+    <!-- Checkout Button -->
+    <form action="/users/checkout" method="GET">
+        <button type="submit">Checkout</button>
+    </form>
 
 </body>
 </html>

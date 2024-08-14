@@ -58,6 +58,7 @@ router.get('/cart', isAuthenticated, (req, res) => {
 });
 
 
+
 router.get('/admin', isAuthenticated, isAdmin, (req, res) => {
     const activityLog = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/activityLog.json')));
     const products = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/products.json')));
@@ -84,13 +85,60 @@ router.post('/store/add-to-cart', isAuthenticated, (req, res) => {
         cart[username] = [];
     }
 
-    cart[username].push(product);
+    // Check if the product is already in the cart
+    const existingItem = cart[username].find(item => item.title === title);
+
+    if (existingItem) {
+        // If the product is already in the cart, increase its quantity
+        existingItem.quantity += 1;
+    } else {
+        // Otherwise, add the product to the cart with a quantity of 1
+        cart[username].push({ ...product, quantity: 1 });
+    }
 
     fs.writeFileSync(path.join(__dirname, '../data/cart.json'), JSON.stringify(cart, null, 2));
 
     console.log('Product added to cart:', product); // Log success
     res.json({ success: true });
 });
+
+//quantity of an item in cart
+router.post('/store/increase-quantity', isAuthenticated, (req, res) => {
+    const { title } = req.body;
+    const username = req.cookies.username;
+
+    const cart = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/cart.json')));
+
+    const item = cart[username].find(item => item.title === title);
+    if (item) {
+        item.quantity += 1;
+        fs.writeFileSync(path.join(__dirname, '../data/cart.json'), JSON.stringify(cart, null, 2));
+    }
+
+    res.redirect('/users/cart');
+});
+
+
+router.post('/store/decrease-quantity', isAuthenticated, (req, res) => {
+    const { title } = req.body;
+    const username = req.cookies.username;
+
+    const cart = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/cart.json')));
+
+    const item = cart[username].find(item => item.title === title);
+    if (item) {
+        if (item.quantity > 1) {
+            item.quantity -= 1;
+        } else {
+            // If quantity reaches 0, remove the item from the cart
+            cart[username] = cart[username].filter(item => item.title !== title);
+        }
+        fs.writeFileSync(path.join(__dirname, '../data/cart.json'), JSON.stringify(cart, null, 2));
+    }
+
+    res.redirect('/users/cart');
+});
+
 
 router.post('/store/remove-from-cart', isAuthenticated, (req, res) => {
     const { title } = req.body;
@@ -117,11 +165,17 @@ router.get('/checkout', isAuthenticated, (req, res) => {
     const username = req.cookies.username;
     const cart = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/cart.json')));
 
-    const userCart = cart[username] || [];
-    const totalPrice = userCart.reduce((total, item) => total + item.price, 0);
+    let totalPrice = 0;
 
-    res.render('checkout', { cart: userCart, totalPrice });
+    if (cart[username]) {
+        cart[username].forEach(item => {
+            totalPrice += item.price * item.quantity; // Calculate the total price based on quantity
+        });
+    }
+
+    res.render('checkout', { cart: cart[username] || [], totalPrice });
 });
+
 
 // Route to handle completing the purchase
 router.post('/checkout/complete', isAuthenticated, (req, res) => {
@@ -144,6 +198,73 @@ router.post('/checkout/complete', isAuthenticated, (req, res) => {
 router.get('/thankyou', isAuthenticated, (req, res) => {
     res.render('thankyou');
 });
+
+router.get('/wishlist', isAuthenticated, (req, res) => {
+    const username = req.cookies.username;
+    const wishlist = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/wishlist.json')));
+
+    const userWishlist = wishlist[username] || [];
+
+    res.render('wishlist', { wishlist: userWishlist });
+});
+
+router.post('/wishlist/add', isAuthenticated, (req, res) => {
+    const { title } = req.body;
+    const username = req.cookies.username;
+
+    // Load the existing wishlist or create an empty one if it doesn't exist
+    const wishlist = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/wishlist.json')));
+
+    if (!wishlist[username]) {
+        wishlist[username] = [];
+    }
+
+    // Check if the item is already in the wishlist
+    const existingItem = wishlist[username].find(item => item.title === title);
+
+    if (existingItem) {
+        return res.status(400).json({ success: false, message: 'Item is already in the wishlist.' });
+    }
+
+    // Load the products to find the one to add to the wishlist
+    const products = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/products.json')));
+    const product = products.find(p => p.title === title);
+
+    if (!product) {
+        return res.status(400).json({ success: false, message: 'Product not found.' });
+    }
+
+    // Add the product to the user's wishlist
+    wishlist[username].push(product);
+
+    // Save the updated wishlist back to the file
+    fs.writeFileSync(path.join(__dirname, '../data/wishlist.json'), JSON.stringify(wishlist, null, 2));
+
+    res.json({ success: true });
+});
+
+router.post('/wishlist/remove', isAuthenticated, (req, res) => {
+    const { title } = req.body;
+    const username = req.cookies.username;
+
+    // Load the current wishlist
+    const wishlist = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/wishlist.json')));
+
+    if (!wishlist[username]) {
+        return res.status(400).json({ success: false, message: 'Wishlist not found.' });
+    }
+
+    // Remove the item from the user's wishlist
+    wishlist[username] = wishlist[username].filter(item => item.title !== title);
+
+    // Save the updated wishlist back to the file
+    fs.writeFileSync(path.join(__dirname, '../data/wishlist.json'), JSON.stringify(wishlist, null, 2));
+
+    // Respond with success
+    res.json({ success: true });
+});
+
+
 
 
 

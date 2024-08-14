@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,21 +19,20 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    alert('Item removed from wishlist!');
-                    // Remove the item from the DOM
+                    // Remove the item from the DOM without alert
                     const itemElement = document.getElementById(title);
                     if (itemElement) {
                         itemElement.remove();
                     }
                 } else {
-                    alert('Error removing item from wishlist.');
+                    console.error('Error removing item from wishlist:', data.message || 'Unknown error');
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('Error removing item from wishlist.');
             });
         }
+        
     </script>
 </head>
 <body>
