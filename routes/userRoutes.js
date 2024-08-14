@@ -3,6 +3,7 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const moment = require('moment-timezone');  // Import moment-timezone
 const router = express.Router();
 const userController = require('../controllers/userController');
 
@@ -66,7 +67,8 @@ router.get('/admin', isAuthenticated, isAdmin, (req, res) => {
 });
 
 
-// add to cart rout
+
+// add to cart route
 router.post('/store/add-to-cart', isAuthenticated, (req, res) => {
     const { title } = req.body;
     const username = req.cookies.username;
@@ -75,7 +77,7 @@ router.post('/store/add-to-cart', isAuthenticated, (req, res) => {
     const product = products.find(p => p.title === title);
 
     if (!product) {
-        console.log('Product not found:', title); // Log the error
+        console.log('Product not found:', title);
         return res.status(400).json({ success: false, message: 'Product not found.' });
     }
 
@@ -89,18 +91,27 @@ router.post('/store/add-to-cart', isAuthenticated, (req, res) => {
     const existingItem = cart[username].find(item => item.title === title);
 
     if (existingItem) {
-        // If the product is already in the cart, increase its quantity
         existingItem.quantity += 1;
     } else {
-        // Otherwise, add the product to the cart with a quantity of 1
         cart[username].push({ ...product, quantity: 1 });
     }
 
     fs.writeFileSync(path.join(__dirname, '../data/cart.json'), JSON.stringify(cart, null, 2));
 
-    console.log('Product added to cart:', product); // Log success
+    // Log add-to-cart activity with Tel Aviv time
+    const activityLog = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/activityLog.json')));
+    activityLog.push({
+        datetime: moment().tz('Asia/Jerusalem').format('YYYY-MM-DD HH:mm:ss'),
+        username: username,
+        type: `Added to cart: ${title}`
+    });
+    fs.writeFileSync(path.join(__dirname, '../data/activityLog.json'), JSON.stringify(activityLog, null, 2));
+
     res.json({ success: true });
 });
+
+
+
 
 //quantity of an item in cart
 router.post('/store/increase-quantity', isAuthenticated, (req, res) => {

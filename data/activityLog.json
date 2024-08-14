@@ -283,5 +283,35 @@
     "datetime": "2024-08-14T11:50:09.642Z",
     "username": "shani",
     "type": "login"
+  },
+  {
+    "datetime": "2024-08-14T12:07:02.474Z",
+    "username": "admin",
+    "type": "login"
+  },
+  {
+    "datetime": "2024-08-14T12:12:28.158Z",
+    "username": "admin",
+    "type": "Added to cart: Black Nike Dunk with smiley"
+  },
+  {
+    "datetime": "2024-08-14T12:12:30.798Z",
+    "username": "admin",
+    "type": "Added to cart: Black Nike Dunk with smiley"
+  },
+  {
+    "datetime": "2024-08-14T12:13:05.989Z",
+    "username": "admin",
+    "type": "Added to cart: Blue and white Dunks"
+  },
+  {
+    "datetime": "2024-08-14 15:21:20",
+    "username": "admin",
+    "type": "Added to cart: Green and Black"
+  },
+  {
+    "datetime": "2024-08-14 15:21:28",
+    "username": "admin",
+    "type": "Added to cart: Green and Black"
   }
 ]
