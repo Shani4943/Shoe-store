@@ -30,6 +30,7 @@
             });
         }
 
+
         function addToWishlist(title) {
             console.log('addToWishlist function called with title:', title);
             fetch('/users/wishlist/add', {
@@ -50,12 +51,31 @@
             .catch(error => {
                 console.error('Error:', error);
                 alert('Error adding item to wishlist.');
+                
+        function filterProducts() {
+            const query = document.getElementById('search').value.toLowerCase();
+            const products = document.querySelectorAll('.product');
+
+            products.forEach(product => {
+                const title = product.querySelector('h2').textContent.toLowerCase();
+                const description = product.querySelector('p').textContent.toLowerCase();
+
+                if (title.includes(query) || description.includes(query)) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
             });
         }
     </script>
 </head>
 <body>
     <h1>Welcome to the Store</h1>
+
+    <!-- Search Bar -->
+    <div>
+        <input type="text" id="search" placeholder="Search for products..." onkeyup="filterProducts()">
+    </div>
 
     <!-- navigation -->
     <nav>
