@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <style>
+        /* Add any necessary styles for the checkout page */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .order-summary {
+            margin-bottom: 20px;
+        }
+
+        .order-summary ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .order-summary li {
+            margin-bottom: 10px;
+        }
+
+        .checkout-button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Checkout</h1>
+    <div class="order-summary">
+        <h2>Your Order</h2>
+        <ul>
+            <% cart.forEach(function(item) { %>
+                <li>
+                    <strong><%= item.title %></strong> - $<%= item.price %>
+                </li>
+            <% }); %>
+        </ul>
+        <p>Total: $<%= totalPrice %></p>
+    </div>
+
+    <form action="/checkout/complete" method="POST">
+        <button type="submit" class="checkout-button">Complete Purchase</button>
+    </form>
+</body>
+</html>
