@@ -7,21 +7,18 @@
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <h1>Contact us</h1>
-
-    <!-- Navigation -->
+    <h1>Contact Us</h1>
     <nav>
         <ul>
             <li><a href="/users/store">Store</a></li>
             <li><a href="/users/cart">Cart</a></li>
             <li><a href="/users/wishlist">Wishlist</a></li>
-            <li><a href="/users/giftcard">Buy Gift Card</a></li>  
+            <li><a href="/users/giftcard">Buy Gift Card</a></li>
             <li><a href="/users/contact">Contact Us</a></li>
-            <li><a href="/users/terms">Regulations and Terms</a></li>
+            <li><a href="/users/terms">Terms and Conditions</a></li>
             <li><a href="/users/logout">Logout</a></li>
         </ul>
     </nav>
-
     <form action="/users/contact" method="post">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required>
@@ -30,9 +27,9 @@
         <input type="email" id="email" name="email" required>
         
         <label for="orderNumber">Order Number:</label>
-        <input type="text" id="orderNumber" name="orderNumber" required>
+        <input type="text" id="orderNumber" name="orderNumber">
         
-        <label for="reason">Reason for Contact:</label>
+        <label for="reason">Reason:</label>
         <select id="reason" name="reason" required>
             <option value="order_tracking">Order Tracking</option>
             <option value="store_credit">Store Credit</option>
@@ -45,5 +42,6 @@
         
         <button type="submit">Send</button>
     </form>
+
 </body>
 </html>

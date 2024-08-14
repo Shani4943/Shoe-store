@@ -194,21 +194,25 @@ router.get('/terms', (req, res) => {
     res.render('terms');
 });
 
-
-// Route for the Contact Us page
-router.get('/contact', (req, res) => {
+// Route to display the contact page
+router.get('/contact', isAuthenticated, (req, res) => {
     res.render('contact');
 });
 
 // Handle contact form submission
-router.post('/contact', (req, res) => {
+router.post('/contact', isAuthenticated, (req, res) => {
     const { name, email, orderNumber, reason, message } = req.body;
 
-    // Process the form data here (e.g., save to a database, send an email)
+    // Process the form data (e.g., save to a database, send an email)
     console.log('Contact Us Form Submitted:', { name, email, orderNumber, reason, message });
 
-    // Redirect to a thank you page or show a success message
-    res.redirect('/users/contact-success'); // Ensure this page exists or modify as needed
+    // Redirect to a thank you page
+    res.redirect('/users/contact-success');
+});
+
+// Route to display the contact success page
+router.get('/contact-success', isAuthenticated, (req, res) => {
+    res.render('contact-success');
 });
 
 module.exports = router;
