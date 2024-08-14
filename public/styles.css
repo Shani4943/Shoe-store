@@ -1,0 +1,100 @@
+/* General Styling */
+body {
+    background-color: #f0f0f0; /* Light grey background */
+    font-family: 'Calibri', sans-serif;
+    color: #333; /* Dark grey text color */
+    margin: 0;
+    padding: 20px; /* Added padding for space on all sides */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+}
+
+/* Title Styling */
+h1 {
+    color: #000000; /* Black title color */
+    font-size: 2.5em;
+    margin: 20px 0;
+}
+
+/* Navigation Styling */
+nav {
+    background-color: #e0e0e0; /* Grey background for the toolbar */
+    width: 100%;
+    padding: 10px 0;
+    margin-bottom: 20px; /* Added margin below navigation */
+    box-sizing: border-box;
+    padding-left: 20px; /* Increased padding on the left */
+    padding-right: 20px; /* Increased padding on the right */
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #000000; /* Black text color for links */
+    font-size: 1.2em;
+}
+
+/* Cart Items Styling */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%; /* Make the list take up the full width */
+    max-width: 1200px; /* Set a max-width for better layout on larger screens */
+    padding-left: 20px; /* Increased padding on the left */
+    padding-right: 20px; /* Increased padding on the right */
+}
+
+li {
+    margin: 20px 0;
+    border-bottom: 1px solid #ccc; /* Light grey border */
+    padding-bottom: 10px;
+    padding-left: 20px; /* Increased padding on the left */
+    padding-right: 20px; /* Increased padding on the right */
+}
+
+li img {
+    display: block;
+    margin-top: 10px;
+}
+
+form {
+    margin-top: 10px;
+}
+
+/* Checkout Button Styling */
+button[type="submit"] {
+    background-color: #333; /* Dark grey button */
+    color: #fff; /* White text */
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 20px;
+}
+
+button[type="submit"]:hover {
+    background-color: #000; /* Black button on hover */
+}
+
+/* Adjustments for container */
+.container {
+    width: 100%;
+    max-width: 1200px; /* Max width for better layout */
+    padding: 20px; /* Padding inside the container */
+    margin: 0 auto; /* Center the container */
+}

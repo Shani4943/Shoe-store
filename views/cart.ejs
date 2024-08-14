@@ -4,9 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Cart</title>
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
     <h1>Your Shopping Cart</h1>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="/users/store">Store</a></li>
+            <li><a href="/users/cart">Cart</a></li>
+            <li><a href="/users/wishlist">Wishlist</a></li>
+            <li><a href="/users/giftcard">Buy Gift Card</a></li>  
+            <li><a href="/users/contact">Contact Us</a></li>
+            <li><a href="/users/terms">Regulations and Terms</a></li>
+            <li><a href="/users/logout">Logout</a></li>
+        </ul>
+    </nav>
+
 
     <!-- Cart Items -->
     <ul>
@@ -28,14 +43,6 @@
         <% } %>
     </ul>
 
-    <!-- Navigation -->
-    <nav>
-        <ul>
-            <li><a href="/users/store">Store</a></li>
-            <li><a href="/users/cart">Cart</a></li>
-            <li><a href="/users/logout">Logout</a></li>
-        </ul>
-    </nav>
 
     <!-- Checkout Button -->
     <form action="/checkout" method="POST">

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Store</title>
+    <link rel="stylesheet" href="/styles.css">
     <!-- use AJAX -->
     <script>
         function addToCart(title) {
@@ -28,21 +29,48 @@
                 alert('Error adding item to cart.');
             });
         }
+
+        function addToWishlist(title) {
+            console.log('addToWishlist function called with title:', title);
+            fetch('/users/wishlist/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ title: title })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Item added to wishlist!');
+                } else {
+                    alert(data.message || 'Error adding item to wishlist.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error adding item to wishlist.');
+            });
+        }
     </script>
 </head>
 <body>
     <h1>Welcome to the Store</h1>
-    <p>Here you can browse and purchase items.</p>
 
     <!-- navigation -->
     <nav>
         <ul>
             <li><a href="/users/store">Store</a></li>
             <li><a href="/users/cart">Cart</a></li>
+            <li><a href="/users/wishlist">Wishlist</a></li>
+            <li><a href="/users/giftcard">Buy Gift Card</a></li>  
+            <li><a href="/users/contact">Contact Us</a></li>
+            <li><a href="/users/terms">Regulations and Terms</a></li>
             <li><a href="/users/logout">Logout</a></li>
         </ul>
     </nav>
 
+    <p>Here you can browse and purchase items.</p>
     <!-- Display Products -->
     <div id="products">
         <% products.forEach(function(product) { %>
@@ -54,6 +82,7 @@
                 <% } %>
                 <p>Price: $<%= product.price %></p>
                 <button onclick="addToCart('<%= product.title %>')">Add to Cart</button>
+                <button onclick="addToWishlist('<%= product.title %>')">Add to Wishlist</button>
             </div>
         <% }); %>
     </div>
